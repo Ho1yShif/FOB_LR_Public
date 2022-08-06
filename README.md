@@ -1,5 +1,5 @@
 # FOB_LR_Public
-Independent Study Project: Classification of Fall Out Boy eras
+Independent Study Project: Classification of Fall Out Boy eras <br>
 Note: This repository is a work in progress
 
 ## Abstract
