@@ -1,16 +1,3 @@
-"""
-Ideas:
-– Ask Zack/Joey: Should I still enforce some types now that I've done type hinting
-– Problem diagnosis: Exploding Gradient
-– Solution: Gradient clipping-by-norm
-Article1: https://neptune.ai/blog/understanding-gradient-clipping-and-how-it-can-fix-exploding-gradients-problem
-Article2: https://machinelearningmastery.com/how-to-avoid-exploding-gradients-in-neural-networks-with-gradient-clipping/
-– Use batching to fix potential issues in fit function
-– Last: Add error checks (try/except) for sigmoid and all functions (started already)
-– Display log scale on loss plot in a better way
-– Plot decision boundary?
-"""
-
 # Setup
 import numpy as np
 import pandas as pd
