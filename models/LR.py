@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from matplotlib import pyplot as plt
-from typing import Union
 
 class ScratchLogisticRegression:
 
