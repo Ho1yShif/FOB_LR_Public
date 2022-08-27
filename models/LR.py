@@ -48,7 +48,7 @@ class ScratchLogisticRegression:
 		return f'learning rate: {self.learning_rate}, number of iterations: {self.n_iters}'
 
 	def fit(self, X: pd.DataFrame, y: pd.DataFrame) -> str:
-		self.fit = 'fit'
+		self.is_fit = 'fit'
 		np.random.seed(0)
 		
 		"""Store features of input data"""
