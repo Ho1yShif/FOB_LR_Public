@@ -95,7 +95,7 @@ class ScratchLogisticRegression:
 					case 1:
 						test_loss.append(log_loss)
 				
-				"""Only update params when we're using training data (when i==0)"""
+				"""Only update params when we're using training data (when is_training==0)"""
 				if is_training == 0:
 					"""Gradient Descent: Calculate partial derivatives
 					of the cost function with respect to the weights and biases"""
