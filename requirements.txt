@@ -1,6 +1,12 @@
 # local packages
+math
+collections
 numpy
 pandas
+matplotlib
+seaborn
+statsmodels
+torch
 spotipy
 lyricsgenius
 sklearn
