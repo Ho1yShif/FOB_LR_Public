@@ -54,7 +54,6 @@ class LogRegNN(nn.Module):
 			y_class = y_predicted.round()
 			
 			accuracy = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)]) / len(y_test)
-			print(f'accuracy: {accuracy:.3f}')
 			
 			return accuracy
    
