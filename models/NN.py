@@ -64,14 +64,14 @@ class LogRegNN(nn.Module):
 			y_class = y_predicted.round()
 		
 		"""Calculate TP, FP, TN, FN values for confusion matrix"""
-		true_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==1])
-		false_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==1 and int(a)==0])
-		true_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==0])
-		false_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==0 and int(a)==1])
+		self.true_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==1])
+		self.false_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==1 and int(a)==0])
+		self.true_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==0])
+		self.false_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==0 and int(a)==1])
 		
 		matrix = DataFrame({'Index': ['Predicted', 'True', 'False'],
-					'': ['True', true_pos, false_neg],
-					'Actual ': ['False', false_pos, true_neg]})
+					'': ['True', self.true_pos, self.false_neg],
+					'Actual ': ['False', self.false_pos, self.true_neg]})
 		matrix = matrix.set_index('Index')
 		
 		return matrix
@@ -86,6 +86,9 @@ if __name__ == "__main__":
 	from sklearn.model_selection import train_test_split
 	import torch
 	import torch.nn as nn
+
+	# Go to FOB_LR directory
+	os.chdir('/Users/shifraisaacs/Documents/GH/FOB_LR')
 
 	# Display entire dataframe
 	pd.set_option('display.max_rows', None)
@@ -111,5 +114,5 @@ if __name__ == "__main__":
 	lrnn.fit(X_train, y_train)
 	
 	# View metrics
-	lrnn.calc_accuracy(X_test, y_test)
-	print(lrnn.confusion_matrix(X_test, y_test))
+	print(lrnn.metrics(X_test, y_test))
+	# print(lrnn.confusion_matrix(X_test, y_test))
