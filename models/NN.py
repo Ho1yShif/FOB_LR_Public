@@ -87,8 +87,6 @@ if __name__ == "__main__":
 	import torch
 	import torch.nn as nn
 
-	# Go to FOB_LR directory
-	os.chdir('/Users/shifraisaacs/Documents/GH/FOB_LR')
 
 	# Display entire dataframe
 	pd.set_option('display.max_rows', None)
@@ -114,5 +112,5 @@ if __name__ == "__main__":
 	lrnn.fit(X_train, y_train)
 	
 	# View metrics
-	print(lrnn.metrics(X_test, y_test))
-	# print(lrnn.confusion_matrix(X_test, y_test))
+	print(lrnn.calc_accuracy(X_test, y_test))
+	print(lrnn.confusion_matrix(X_test, y_test))
