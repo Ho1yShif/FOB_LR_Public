@@ -144,8 +144,6 @@ class ScratchLogisticRegression:
 			predictions = self.predicted_classes
 
 		"""Count true positives, true negatives, false positives, and false negatives"""
-		self.true_pos, self.true_neg, self.false_pos, self.false_neg = 0, 0, 0, 0
-		
 		self.true_pos = sum([1 for p,a in zip(predictions, actuals) if int(p)==int(a)==1])
 		self.false_pos = sum([1 for p,a in zip(predictions, actuals) if int(p)==1 and int(a)==0])
 		self.true_neg = sum([1 for p,a in zip(predictions, actuals) if int(p)==int(a)==0])
