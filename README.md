@@ -2,6 +2,8 @@
 Independent Study Project: Classification of Fall Out Boy Eras. <br>
 This version of the repository is public and does not contain any sensitive personal access keys.
 
+## [Project Report](https://docs.google.com/document/d/1r6A2JHU6jtBoxAq3eWm2eP08l_u6KRtKTEpcoQXS84I/edit?usp=sharing)
+
 ## Abstract
 
 The statistical modeling technique of logistic regression (LR) has become the standard for binary classification. Supervised machine learning often leverages LR to predict whether a given event will fall into one of two categories: Class 0 or Class 1.
