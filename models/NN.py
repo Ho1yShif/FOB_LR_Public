@@ -48,14 +48,40 @@ class LogRegNN(nn.Module):
 		
 		print('Successfully fit Logistic Regression network to input data.')
 
-	def calc_accuracy(self, X_test, y_test):
+	def calc_metrics(self, X_test, y_test):
 		with torch.no_grad():
 			y_predicted = self(X_test.float())
 			y_class = y_predicted.round()
 			
-			accuracy = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)]) / len(y_test)
-			
-			return accuracy
+		"""Count true positives, true negatives, false positives, and false negatives"""
+		self.true_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==1])
+		self.false_pos = sum([1 for p,a in zip(y_class, y_test) if int(p)==1 and int(a)==0])
+		self.true_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==int(a)==0])
+		self.false_neg = sum([1 for p,a in zip(y_class, y_test) if int(p)==0 and int(a)==1])
+
+		"""Calculate accuracy, precision, recall, and F1-Score; account for ZeroDivisionErrors"""
+		self.accuracy = (y_class == y_test).sum() / len(y_test)
+		
+		try:
+			self.precision = self.true_pos / (self.true_pos + self.false_pos)
+		except ZeroDivisionError:
+			self.precision = 0.0
+		
+		try:
+			self.recall = self.true_pos / (self.true_pos + self.false_neg)
+		except ZeroDivisionError:
+			self.recall = 0.0
+		
+		try:
+			self.f1 = (self.precision * self.recall) / (self.precision + self.recall)
+		except ZeroDivisionError:
+			self.f1 = 0.0
+		
+		metrics = [float(self.accuracy)/100, self.precision, self.recall, self.f1]
+		percents = [f'{metric*100:.4}%' for metric in metrics]
+		metrics_df = DataFrame({'Metric': ['Accuracy', 'Precision', 'Recall', 'F1 Score'], 'Value': percents})
+
+		return metrics_df
    
 	def confusion_matrix(self, X_test, y_test):
 		with torch.no_grad():
@@ -86,7 +112,6 @@ if __name__ == "__main__":
 	import torch
 	import torch.nn as nn
 
-
 	# Display entire dataframe
 	pd.set_option('display.max_rows', None)
 	pd.set_option('display.max_columns', None)
@@ -111,5 +136,5 @@ if __name__ == "__main__":
 	lrnn.fit(X_train, y_train)
 	
 	# View metrics
-	print(lrnn.calc_accuracy(X_test, y_test))
+	print(lrnn.calc_metrics(X_test, y_test))
 	print(lrnn.confusion_matrix(X_test, y_test))
